@@ -7,23 +7,38 @@
 <meta name="author" content="lyuan">
 <link rel="icon" href="/img/favicon.ico">
 <style>
-ul,li{list-style:none;}
 .main{width:1000px;margin:100px auto 0;}
-.main li{width:100px;float:left;margin:10px;text-align:center;}
-.main li img{width:100px;height:100px;}
+.main textarea{width:300px;height:100px;padding:10px;border:1px solid #ccc;}
+.main a{width:100px;height:30px;text-align:center;}
 </style>
 </head>
 <body>
-<ul class="main">
-	<li>
-		<img src="images/as-ios-qrcode.png" />
-		<p>AS-iOS</p>
-	</li>
-	<li>
-		<img src="images/as-android-qrcode.png" />
-		<p>AS-android</p>
-	</li>
-</ul>
+
+<div class="main">
+	<textarea id="J_txt" placeholder="请输入内容"></textarea>
+	<a id="J_qrcode_btn" href="javascript:;">生成二维码</a>
+
+	<div class="J_show_qrcode_canvas"></div>
+
+</div>
+
+<script type="text/javascript" src="js/require-jquery.js">
+	require(['jquery','jquery.qrcode.min'],function($){
+		'use strict';
+
+		$('#J_qrcode_btn').on('click',function(){
+			console.log(1);
+
+			var text = $.trim( $('#J_txt').val() );
+			
+			$('#J_show_qrcode_canvas').qrcode({
+				text	: text
+			});
+		});
+
+
+	});
+</script>
 
 </body>
 </html>
