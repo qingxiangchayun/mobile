@@ -19,7 +19,6 @@
 
 <div class="main">
 	<div id="J_show_info" class="user-agent"></div>
-	<input id="J_txt" type="text" value="" />
 </div>
 
 
@@ -66,7 +65,6 @@ window.onload = function(){
 
 		//网页进入后台后会挂起js 的执行，但是这个期间有600-1000ms的时间js仍然会执行
 		setTimeout(function(){
-			clearInterval(timer);
 			window.location.href = config.download_url;
 		},config.timeout)
 
