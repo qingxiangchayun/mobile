@@ -39,9 +39,9 @@ window.onload = function(){
 	//scheme的属性名与mobileType的值保持一致。
 	var config = {
 		scheme :{  
-			'iPhone' : 'dianping://discountlist',
+			'iPhone' : 'iOSDevAblesky://ablesky',
 			'iPad' : '',
-			'Android' : '',
+			'Android' : 'AndroidDevAblesky://ablesky',
 		},
 		download_url : 'https://itunes.apple.com/cn/app/neng-li-tian-kong-ke-tang/id655930315?ls=1&mt=8', // 下载引导页
 		timeout : 600 
@@ -57,13 +57,14 @@ window.onload = function(){
 
 	console.log(mobileType,config.scheme[mobileType])
 	var i = 0;
+		//网页进入后台后会挂起js 的执行，但是这个期间有600-1000ms的时间js仍然会执行
+	
 	var openclient = (function(){
 		var iframe = document.createElement('iframe');
 		iframe.style.display = 'none';
 		iframe.src = config.scheme[mobileType];
 		document.body.appendChild(iframe);
 
-		//网页进入后台后会挂起js 的执行，但是这个期间有600-1000ms的时间js仍然会执行
 		setTimeout(function(){
 			window.location.href = config.download_url;
 		},config.timeout)
