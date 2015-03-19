@@ -8,35 +8,40 @@
 <link rel="icon" href="/img/favicon.ico">
 <style>
 .main{width:1000px;margin:100px auto 0;}
-.main textarea{width:300px;height:100px;padding:10px;border:1px solid #ccc;}
-.main a{width:100px;height:30px;text-align:center;}
+.main textarea{width:500px;height:100px;margin-top:50px;padding:10px;border:1px solid #ccc;}
 </style>
 </head>
 <body>
 
 <div class="main">
+	<p>AS qrcode -- 'location.href'/download.html</p>
+	<div id="J_as_qrcode"></div>
+
 	<textarea id="J_txt" placeholder="请输入内容"></textarea>
 	<a id="J_qrcode_btn" href="javascript:;">生成二维码</a>
-
-	<div class="J_show_qrcode_canvas"></div>
+	<div id="J_show_qrcode_canvas"></div>
 
 </div>
 
-<script type="text/javascript" src="js/require-jquery.js">
-	require(['jquery','jquery.qrcode.min'],function($){
+<script type="text/javascript" src="js/require-jquery.js"></script>
+
+<script type="text/javascript">
+
+	require(['jquery','js/jquery.qrcode.min'],function($){
 		'use strict';
 
 		$('#J_qrcode_btn').on('click',function(){
-			console.log(1);
 
 			var text = $.trim( $('#J_txt').val() );
-			
-			$('#J_show_qrcode_canvas').qrcode({
+
+			$('#J_show_qrcode_canvas').empty().qrcode({
 				text	: text
 			});
 		});
 
-
+		$('#J_as_qrcode').qrcode({
+			text : window.location.href + 'download.html'
+		});
 	});
 </script>
 

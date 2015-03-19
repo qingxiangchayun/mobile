@@ -1,0 +1,54 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>大众点评网手机应用中转页面</title>
+</head>
+<script type="text/javascript" src="http://i1.s1.dpfile.com/hls/hippo2.min.v109.js"></script>
+<body>
+<h3>正在转向相关页面...</h3>
+<iframe id="mobileFrame" frameborder="0" src="" style="display:none"></iframe>
+
+</body>
+
+<script type="text/javascript">
+var frame = document.getElementById('mobileFrame');
+var startTime = new Date().getTime();
+var cok = "luid=909137355";
+var temurl = "";
+function doit(url){
+	window.location = temurl;
+}
+function openDPUrl() {
+	var current = new Date().getTime();
+	if(current - startTime < 500)
+	{
+		
+		setTimeout("window.location.href='http://m.dianping.com/tuan/couponlist'",2000);	
+	}
+}
+
+function openDPUrl1() {
+	var current = new Date().getTime();
+	if(current - startTime < 500)
+	{
+		var userAgent = navigator.userAgent;
+		frame.src = "dptuan://discountlist";
+		startTime = current;
+		setTimeout(openDPUrl, 400);
+	}
+
+}
+
+window.onload = function() {
+var cur = "";
+	if(document.cookie.match('luid=\\d+')) {
+		cur = document.cookie.match('luid=\\d+')[0];
+	}
+	if(cur != cok) {
+		document.cookie = cok;
+		frame.src = "dianping://discountlist";
+		startTime = new Date().getTime();
+		setTimeout(openDPUrl1, 400);
+
+	}
+};
+</script>
+</html>

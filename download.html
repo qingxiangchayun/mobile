@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>mobile-download</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+<meta name="author" content="lyuan">
+<link rel="icon" href="/img/favicon.ico">
+<style>
+.main{width:100%;}
+.main .user-agent{padding:20px;}
+.main textarea{width:300px;height:100px;padding:10px;border:1px solid #ccc;}
+.main a{width:100px;height:30px;text-align:center;}
+</style>
+</head>
+<body>
+
+<h3>正在转向相关页面...</h3>
+<iframe id="J_mobileFrame" frameborder="0" src="" style="display:none"></iframe>
+
+<div class="main">
+	<div id="J_show_info" class="user-agent"></div>
+</div>
+
+
+<script type="text/javascript">
+window.onload = function(){
+
+	var showUserAgent = (function(){
+		var userAgentStr = window.navigator.userAgent;
+		var showInfoObj = document.getElementById('J_show_info');
+
+		showInfoObj.innerHTML = userAgentStr;
+	})();
+
+
+	var frame = document.getElementById('J_mobileFrame');
+	//frame.src = ''
+
+}
+
+</script>
+
+</body>
+</html>
