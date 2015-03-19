@@ -8,7 +8,7 @@
 <link rel="icon" href="/img/favicon.ico">
 <style>
 .main{width:1000px;margin:100px auto 0;}
-.main textarea{width:500px;height:100px;margin-top:50px;padding:10px;border:1px solid #ccc;}
+.main textarea{width:800px;height:50px;margin:10px 0;padding:10px;border:1px solid #ccc;}
 </style>
 </head>
 <body>
@@ -17,7 +17,8 @@
 	<p>AS qrcode -- 'location.href'/download.html</p>
 	<div id="J_as_qrcode"></div>
 
-	<textarea id="J_txt" placeholder="请输入内容"></textarea>
+	<p>qrcode = 'location.href'/download.html + app scheme</p>
+	<textarea id="J_txt" placeholder="请输入app scheme"></textarea>
 	<a id="J_qrcode_btn" href="javascript:;">生成二维码</a>
 	<div id="J_show_qrcode_canvas"></div>
 
@@ -32,10 +33,12 @@
 
 		$('#J_qrcode_btn').on('click',function(){
 
-			var text = $.trim( $('#J_txt').val() );
+			var scheme = encodeURIComponent( $.trim( $('#J_txt').val() ) );
+
+			console.log(window.location.href + 'download.html?scheme=' + scheme)
 
 			$('#J_show_qrcode_canvas').empty().qrcode({
-				text	: text
+				text : window.location.href + 'download.html?scheme=' + scheme
 			});
 		});
 

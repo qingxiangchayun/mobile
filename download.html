@@ -36,6 +36,11 @@ window.onload = function(){
 
 	var userAgent = navigator.userAgent.toLowerCase();
 	var mobileType = '';
+	
+	var queryString = function(key) {
+		var result, uri = window.location.search, re = new RegExp('(?:[?|&]|^)' + key + '=([^&?]*)', 'ig');
+		return (result = re.exec(uri)) ? result[1] : null;
+	};
 
 	//scheme的属性名与mobileType的值保持一致。
 	var config = {
@@ -45,8 +50,15 @@ window.onload = function(){
 			'Android' : 'devablesky://ablesky',
 		},
 		download_url : 'http://www.ablesky.com/eventsRedirect.do?action=toLeadToDownloadClient', // 下载引导页
-		timeout : 6000
+		//timeout : 6000
+		timeout : 100000
 	};
+
+	var queryScheme = decodeURIComponent ( queryString('scheme') );
+	if(queryScheme){
+		config.scheme.iPhone = config.scheme.Android = queryScheme;
+	}
+
 
 	if(/iPhone|iPod/i.exec(userAgent)){
 		mobileType = 'iPhone';
@@ -56,7 +68,7 @@ window.onload = function(){
 		mobileType = 'Android';
 	}
 
-	document.getElementById('J_show_mobile').innerHTML = mobileType;
+	document.getElementById('J_show_mobile').innerHTML = mobileType + '--' + config.scheme[mobileType];
 
 	console.log(mobileType,config.scheme[mobileType])
 		
