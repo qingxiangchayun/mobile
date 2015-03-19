@@ -19,6 +19,7 @@
 
 <div class="main">
 	<div id="J_show_info" class="user-agent"></div>
+	<div id="J_show_mobile" style="font-size:60px;"></div>
 </div>
 
 
@@ -44,21 +45,22 @@ window.onload = function(){
 			'Android' : 'AndroidDevAblesky://ablesky',
 		},
 		download_url : 'http://www.ablesky.com/eventsRedirect.do?action=toLeadToDownloadClient', // 下载引导页
-		timeout : 600 
+		timeout : 6000
 	};
 
-	if(userAgent.indexOf('iphone') !== -1){
+	if(/iPhone|iPod/i.exec(userAgent)){
 		mobileType = 'iPhone';
-	}else if(userAgent.indexOf('ipad') !== -1){
+	}else if(/iPad/i.exec(userAgent)){
 		mobileType = 'iPad';
 	}else{
 		mobileType = 'Android';
 	}
 
+	document.getElementById('J_show_mobile').innerHTML = mobileType;
+
 	console.log(mobileType,config.scheme[mobileType])
-	var i = 0;
-		//网页进入后台后会挂起js 的执行，但是这个期间有600-1000ms的时间js仍然会执行
-	
+		
+	//网页进入后台后会挂起js 的执行，但是这个期间有600-1000ms的时间js仍然会执行
 	var openclient = (function(){
 		var iframe = document.createElement('iframe');
 		iframe.style.display = 'none';
