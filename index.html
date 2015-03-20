@@ -14,13 +14,18 @@
 <body>
 
 <div class="main">
-	<p>AS qrcode -- 'location.href'/download.html</p>
+	<p>AS qrcode -- 当前网址+download.html</p>
 	<div id="J_as_qrcode"></div>
 
-	<p>qrcode = 'location.href'/download.html + app scheme</p>
-	<textarea id="J_txt" placeholder="请输入app scheme"></textarea>
-	<a id="J_qrcode_btn" href="javascript:;">生成二维码</a>
-	<div id="J_show_qrcode_canvas"></div>
+	<p>通过app scheme生成二维码  二维码内容：当前网址 + download.html + app scheme</p>
+	<textarea id="J_txt1" placeholder="请输入app scheme"></textarea>
+	<a id="J_qrcode_btn1" href="javascript:;">生成二维码</a>
+	<div id="J_show_qrcode_canvas1"></div>
+
+	<p>完全自定义二维码  二维码内容：输入的内容</p>
+	<textarea id="J_txt2" placeholder="请输入内容"></textarea>
+	<a id="J_qrcode_btn2" href="javascript:;">生成二维码</a>
+	<div id="J_show_qrcode_canvas2"></div>
 
 </div>
 
@@ -31,14 +36,21 @@
 	require(['jquery','js/jquery.qrcode.min'],function($){
 		'use strict';
 
-		$('#J_qrcode_btn').on('click',function(){
+		$('#J_qrcode_btn1').on('click',function(){
 
-			var scheme = encodeURIComponent( $.trim( $('#J_txt').val() ) );
+			var scheme = encodeURIComponent( $.trim( $('#J_txt1').val() ) );
 
 			console.log(window.location.href + 'download.html?scheme=' + scheme)
 
-			$('#J_show_qrcode_canvas').empty().qrcode({
+			$('#J_show_qrcode_canvas1').empty().qrcode({
 				text : window.location.href + 'download.html?scheme=' + scheme
+			});
+		});
+
+		$('#J_qrcode_btn2').on('click',function(){
+			
+			$('#J_show_qrcode_canvas2').empty().qrcode({
+				text : $.trim( $('#J_txt2').val() )
 			});
 		});
 

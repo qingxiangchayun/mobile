@@ -19,7 +19,7 @@
 
 <div class="main">
 	<div id="J_show_info" class="user-agent"></div>
-	<div id="J_show_mobile" style="font-size:60px;"></div>
+	<div id="J_show_mobile" style="font-size:20px;"></div>
 </div>
 
 
@@ -50,12 +50,12 @@ window.onload = function(){
 			'Android' : 'devablesky://ablesky',
 		},
 		download_url : 'http://www.ablesky.com/eventsRedirect.do?action=toLeadToDownloadClient', // 下载引导页
-		//timeout : 6000
-		timeout : 100000
+		timeout : 600000
 	};
 
 	var queryScheme = decodeURIComponent ( queryString('scheme') );
-	if(queryScheme){
+
+	if(queryScheme !== 'null'){
 		config.scheme.iPhone = config.scheme.Android = queryScheme;
 	}
 
@@ -68,7 +68,6 @@ window.onload = function(){
 		mobileType = 'Android';
 	}
 
-	document.getElementById('J_show_mobile').innerHTML = mobileType + '--' + config.scheme[mobileType];
 
 	console.log(mobileType,config.scheme[mobileType])
 		
@@ -79,9 +78,12 @@ window.onload = function(){
 		iframe.src = config.scheme[mobileType];
 		document.body.appendChild(iframe);
 
+
 		setTimeout(function(){
 			window.location.href = config.download_url;
 		},config.timeout)
+
+		document.getElementById('J_show_mobile').innerHTML = '手机型号：'+mobileType +  ' <br/>scheme:'+config.scheme[mobileType];
 
 	})();
 
