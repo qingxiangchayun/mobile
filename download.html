@@ -50,7 +50,7 @@ window.onload = function(){
 			'Android' : 'devablesky://ablesky',
 		},
 		download_url : 'http://www.ablesky.com/eventsRedirect.do?action=toLeadToDownloadClient', // 下载引导页
-		timeout : 600000
+		timeout : 6000
 	};
 
 	var queryScheme = decodeURIComponent ( queryString('scheme') );
@@ -67,7 +67,6 @@ window.onload = function(){
 	}else{
 		mobileType = 'Android';
 	}
-
 
 	console.log(mobileType,config.scheme[mobileType])
 		
