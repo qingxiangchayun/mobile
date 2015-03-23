@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>mobile-download</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+<meta name="author" content="lyuan">
+<link rel="icon" href="/img/favicon.ico">
+<style>
+body{background:#f7f7f7;}
+.app{padding-top:50px;text-align:center;}
+.app img{width:40%;display:inline-block;}
+.app p{padding-top:30px;color:#555;}
+</style>
+</head>
+<body>
+
+<div class="app">
+	<p>能力课堂移动客户端</p>
+</div>
+
+
+<script type="text/javascript">
+
+window.onload = function(){
+
+	var userAgent = navigator.userAgent.toLowerCase();
+	var mobileType = '';
+	var downloadUrl = '';
+	
+	var isWeixin = /.*?(micromessenger\/([0-9.]+))\s*/.exec(userAgent);
+
+	var oDiv = document.createElement('div');
+	oDiv.innerHTML = 'userAgent:'+userAgent + '<br/>isWeixin: '+ isWeixin;
+	document.body.appendChild(oDiv);
+
+	if(/iPhone|iPod/i.exec(userAgent)){
+		mobileType = 'iPhone';
+	}else if(/iPad/i.exec(userAgent)){
+		mobileType = 'iPad';
+	}else{
+		mobileType = 'Android';
+	}
+
+	if(mobileType === 'iPhone'){
+		downloadUrl = 'https://itunes.apple.com/cn/app/neng-li-tian-kong-ke-tang/id655930315?ls=1&mt=8';
+	}else if(mobileType === 'iPad'){
+		downloadUrl = 'https://itunes.apple.com/us/app/neng-li-ke-tanghd/id868676325?mt=8&uo=4';
+	}else{
+		downloadUrl = 'http://stat.ablesky.com/client/android/AbleskyClient.apk';
+	}
+
+	// weixin android 跳转到应用包
+	if(isWeixin && mobileType === "Android"){
+		downloadUrl = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ablesky.ui.activity';
+	}
+
+	setTimeout(function(){
+		window.location.href = downloadUrl;
+	},10000);
+	
+}
+
+</script>
+
+</body>
+</html>

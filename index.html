@@ -9,14 +9,23 @@
 <style>
 .main{width:1000px;margin:100px auto 0;}
 .main textarea{width:800px;height:50px;margin:10px 0;padding:10px;border:1px solid #ccc;}
-
+.as-qrcode{overflow:hidden;}
+.list{width:500px;float:left;}
 </style>
 </head>
 <body>
 
 <div class="main">
-	<p>AS qrcode -- 当前网址+download.html</p>
-	<div id="J_as_qrcode"></div>
+	<div class="as-qrcode">
+		<div class="list">
+			<p>AS qrcode -- 当前网址+download.html</p>
+			<div id="J_as_qrcode"></div>
+		</div>
+		<div class="list">
+			<p>AS qrcode -- 当前网址+app.html</p>
+			<div id="J_as_qrcode1"></div>
+		</div>
+	</div>
 
 	<p>添加app scheme生成二维码  二维码内容：当前网址 + download.html + app scheme</p>
 	<textarea id="J_txt1" placeholder="请输入app scheme"></textarea>
@@ -57,6 +66,10 @@
 
 		$('#J_as_qrcode').qrcode({
 			text : window.location.href + 'download.html'
+		});
+
+		$('#J_as_qrcode1').qrcode({
+			text : window.location.href + 'app.html'
 		});
 	});
 </script>
