@@ -60,6 +60,8 @@
 		$('#J_qrcode_btn2').on('click',function(){
 			
 			$('#J_show_qrcode_canvas2').empty().qrcode({
+				width : 120,
+				height : 120,
 				text : $.trim( $('#J_txt2').val() )
 			});
 		});
