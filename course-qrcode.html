@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>mobile-download</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+<meta name="author" content="lyuan">
+<link rel="icon" href="/img/favicon.ico">
+
+</head>
+<body>
+
+<h3>正在转向相关页面...</h3>
+
+
+<script type="text/javascript">
+/*
+二维码内容应类似：
+http://ablesky.com/app/course?courseid=1
+*/
+
+window.onload = function(){
+	
+	var userAgent = navigator.userAgent.toLowerCase();
+	var mobileType = '';
+
+	//scheme的属性名与mobileType的值保持一致。
+	var config = {
+		scheme :{  
+			'iPhone' : 'iOSDevAblesky://ablesky', // 客户端自定义的
+			'iPad' : '',
+			'Android' : 'devablesky://ablesky',
+		},
+		download_url : 'http://www.ablesky.com/eventsRedirect.do?action=toLeadToDownloadClient', // 下载引导页
+		timeout : 600
+	};
+
+
+	if(/iPhone|iPod/i.exec(userAgent)){
+		mobileType = 'iPhone';
+	}else if(/iPad/i.exec(userAgent)){
+		mobileType = 'iPad';
+	}else{
+		mobileType = 'Android';
+	}
+
+		
+	//网页进入后台后会挂起js 的执行，但是这个期间有600-1000ms的时间js仍然会执行
+	var openclient = (function(){
+		var iframe = document.createElement('iframe');
+		iframe.style.display = 'none';
+		iframe.src = config.scheme[mobileType];
+		document.body.appendChild(iframe);
+
+
+		setTimeout(function(){
+			window.location.href = config.download_url;
+		},config.timeout)
+
+	})();
+
+}
+
+</script>
+
+</body>
+</html>
