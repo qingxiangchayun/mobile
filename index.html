@@ -46,6 +46,18 @@
 	require(['jquery','js/jquery.qrcode.min'],function($){
 		'use strict';
 
+		var render = 'canvas';
+
+		if(!document.createElement('canvas').getContext){
+			render = 'div';
+		}
+
+		if(!window.console){
+			window.console = {
+				log : function(){}
+			}
+		}
+
 		$('#J_qrcode_btn1').on('click',function(){
 
 			var scheme = encodeURIComponent( $.trim( $('#J_txt1').val() ) );
@@ -53,6 +65,7 @@
 			console.log(window.location.href + 'download.html?scheme=' + scheme)
 
 			$('#J_show_qrcode_canvas1').empty().qrcode({
+				render : render,
 				text : window.location.href + 'download.html?scheme=' + scheme
 			});
 		});
@@ -60,6 +73,7 @@
 		$('#J_qrcode_btn2').on('click',function(){
 			
 			$('#J_show_qrcode_canvas2').empty().qrcode({
+				render : render,
 				width : 120,
 				height : 120,
 				text : $.trim( $('#J_txt2').val() )
@@ -67,10 +81,12 @@
 		});
 
 		$('#J_as_qrcode').qrcode({
+			render : render,
 			text : window.location.href + 'download.html'
 		});
 
 		$('#J_as_qrcode1').qrcode({
+			render : render,
 			text : window.location.href + 'app.html'
 		});
 	});
