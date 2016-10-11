@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>mobile-index</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+<meta name="author" content="lyuan">
+<link rel="icon" href="/img/favicon.ico">
+<style>
+.main{width:1000px;margin:100px auto 0;}
+.main textarea{width:800px;height:50px;margin:10px 0;padding:10px;border:1px solid #ccc;}
+.as-qrcode{overflow:hidden;}
+.list{width:500px;float:left;}
+</style>
+</head>
+<body>
+
+<div class="main">
+	<div class="as-qrcode">
+		<div class="list">
+			<p>扫码获取useragent</p>
+			<div id="J_as_qrcode"></div>
+		</div>
+	</div>
+
+	<p>useragent</p>
+	<textarea id="J_txt1"></textarea>
+	
+
+</div>
+
+<script type="text/javascript" src="js/require-jquery.js"></script>
+
+<script type="text/javascript">
+
+	require(['jquery','js/jquery.qrcode.min'],function($){
+		'use strict';
+
+		var render = 'canvas';
+		var userAgentStr = window.navigator.userAgent;
+
+		if(!document.createElement('canvas').getContext){
+			render = 'div';
+		}
+
+		if(!window.console){
+			window.console = {
+				log : function(){}
+			}
+		}
+
+		$('#J_as_qrcode').qrcode({
+			render : render,
+			text : window.location.href + 'useragent.html'
+		});
+
+		$('#J_txt1').val(userAgentStr);
+
+		console.log(userAgentStr);
+		
+	});
+</script>
+
+</body>
+</html>
